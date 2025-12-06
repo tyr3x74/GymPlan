@@ -58,14 +58,75 @@ public class App {
         System.out.printf("\nKarbo                : %.0f gram/hari", makro.get("carbs"));
         System.out.printf("\nLemak                : %.0f gram/hari", makro.get("fat"));
         System.out.println("\n==========================          JADWAL LATIHAN          ===========================");
-        ScheduleGenerator generator = new ScheduleGenerator(goal);
+        Graph graph = new Graph();
+
+        if (goal == "Cutting") {
+            if(freq <= 2 ){
+                graph.addNode("Full Body", 1, "strength", false);
+                graph.addNode("Full Body", 2, "hypertrophy", true);
+            } else if (freq == 4) {
+                graph.addNode("Push", 1, "hypertrophy", true);
+                graph.addNode("Pull", 2, "hypertrophy", true);
+                graph.addNode("Legs", 3, "hypertrophy", false);
+                graph.addNode("Full Body", 4, "hypertrophy", true);
+            } else {
+                graph.addNode("Upper Body", 4, "hypertrophy", true);
+                graph.addNode("Lower Body", 5, "hypertrophy", true);
+                graph.addNode("Push", 1, "hypertrophy", true);
+                graph.addNode("Pull", 2, "hypertrophy", true);
+                graph.addNode("Legs", 3, "hypertrophy", true);
+                graph.addNode("Full Body", 6, "hypertrophy", true);
+            }
+        } else if (goal == "Bulking") {
+            if(freq <= 2 ){
+                graph.addNode("Full Body", 1, "strength", false);
+                graph.addNode("Full Body", 2, "hypertrophy", false);
+            } else if (freq == 4) {
+                graph.addNode("Push", 1, "strength", false);
+                graph.addNode("Pull", 2, "strength", false);
+                graph.addNode("Legs", 3, "strength", false);
+                graph.addNode("Full Body", 4, "hypertrophy", true);
+            } else {
+                graph.addNode("Upper Body", 4, "hypertrophy", false);
+                graph.addNode("Lower Body", 5, "hypertrophy", false);
+                graph.addNode("Push", 1, "strength", false);
+                graph.addNode("Pull", 2, "strength", false);
+                graph.addNode("Legs", 3, "strength", false);
+                graph.addNode("Full Body", 6, "hypertrophy", false);
+            }
+        } else {
+            if(freq <= 2 ){
+                graph.addNode("Full Body", 1, "strength", false);
+                graph.addNode("Full Body", 2, "hypertrophy", true);
+            } else if (freq == 4) {
+                graph.addNode("Upper Body", 1, "strength", false);
+                graph.addNode("Lower Body", 2, "strength", false);
+                graph.addNode("Upper Body", 3, "hypertrophy", true);
+                graph.addNode("Lower Body", 4, "hypertrophy", false);
+            } else {
+                graph.addNode("Upper Body", 1, "strength", true);
+                graph.addNode("Lower Body", 2, "strength", false);
+                graph.addNode("Push", 3, "hypertrophy", true);
+                graph.addNode("Pull", 4, "hypertrophy", false);
+                graph.addNode("Legs", 5, "hypertrophy", false);
+                graph.addNode("Full Body", 6, "hypertrophy", true);
+            }
+        }
+        List<WorkoutNode> sortedSchedule = graph.Priority();
+        BST bst = new BST();
+        for (WorkoutNode workout : sortedSchedule) {
+            bst.insert(workout);
+        }
+
+        ScheduleGenerator generator = new ScheduleGenerator(goal, bst);
         List<String> schedule = generator.buildSchedule(freq);
+
         for (int i = 0; i < 7; i++) {
             String day = ScheduleGenerator.WEEK[i];
             String workout = schedule.get(i);
 
             if (workout.equals("Rest")) {
-                System.out.printf("%s : %s (Recovery Day)\n", day, workout);
+                System.out.printf("%s : %s\n", day, workout);
             } else {
                 System.out.printf("%s : %s\n", day, workout);
             }
