@@ -14,26 +14,26 @@ public class App {
                 "|  $$$$$$/    | $$    | $$ \\/  | $$      | $$      | $$|  $$$$$$$| $$  | $$\n" +
                 " \\______/     |__/    |__/     |__/      |__/      |__/ \\_______/|__/  |__/\n"
         );
-        System.out.print("Nama : ");
+        System.out.print("[+] Nama : ");
         String nama = sc.nextLine();
 
-        System.out.print("Gender (M/F): ");
+        System.out.print("[+] Gender (M/F): ");
         String gender = sc.nextLine();
 
-        System.out.print("Berat (kg): ");
+        System.out.print("[+] Berat (kg): ");
         double weight = sc.nextDouble();
 
-        System.out.print("Tinggi (cm): ");
+        System.out.print("[+] Tinggi (cm): ");
         double height = sc.nextDouble();
 
 
-        System.out.print("Lemak tubuh (%): ");
+        System.out.print("[+] Lemak tubuh (%): ");
         int bodyfat = sc.nextInt();
 
-        System.out.print("Umur: ");
+        System.out.print("[+] Umur: ");
         int age = sc.nextInt();
 
-        System.out.print("Frekuensi latihan per minggu (1-6): ");
+        System.out.print("[+] Frekuensi latihan per minggu (1-6): ");
         int freq = sc.nextInt();
 
         if(freq < 1){
@@ -48,15 +48,15 @@ public class App {
         String goal = user.Goal();
 
         System.out.println("==============================      HASIL ANALISIS     ================================");
-        System.out.printf("Nama                 : %s", nama);
-        System.out.printf("\nBMI                  : %.0f (%s)", user.bmi(), user.bmiStatus());
-        System.out.printf("\nBodyfat              : %s (%d%%)", user.fatStatus(), bodyfat);
-        System.out.printf("\nRekomendasi Goal     : %s", goal);
+        System.out.printf("[-] Nama                 : %s", nama);
+        System.out.printf("\n[-] BMI                  : %.0f (%s)", user.bmi(), user.bmiStatus());
+        System.out.printf("\n[-] Bodyfat              : %s (%d%%)", user.fatStatus(), bodyfat);
+        System.out.printf("\n[-] Rekomendasi Goal     : %s", goal);
         System.out.println("\n==========================      KEBUTUHAN NUTRISI HARIAN     ===========================");
-        System.out.printf("Target Kalori        : %.0f kkal/hari", makro.get("calories"));
-        System.out.printf("\nProtein              : %.0f gram/hari", makro.get("protein"));
-        System.out.printf("\nKarbo                : %.0f gram/hari", makro.get("carbs"));
-        System.out.printf("\nLemak                : %.0f gram/hari", makro.get("fat"));
+        System.out.printf("[-] Target Kalori        : %.0f kkal/hari", makro.get("calories"));
+        System.out.printf("\n[-] Protein              : %.0f gram/hari", makro.get("protein"));
+        System.out.printf("\n[-] Karbo                : %.0f gram/hari", makro.get("carbs"));
+        System.out.printf("\n[-] Lemak                : %.0f gram/hari", makro.get("fat"));
         System.out.println("\n==========================          JADWAL LATIHAN          ===========================");
         Graph graph = new Graph();
 
@@ -74,7 +74,7 @@ public class App {
                 graph.addNode("Lower Body", 5, "hypertrophy", true);
                 graph.addNode("Push", 1, "hypertrophy", true);
                 graph.addNode("Pull", 2, "hypertrophy", true);
-                graph.addNode("Legs", 3, "hypertrophy", true);
+                graph.addNode("Legs", 3, "hypertrophy", false);
                 graph.addNode("Full Body", 6, "hypertrophy", true);
             }
         } else if (goal == "Bulking") {
@@ -126,9 +126,9 @@ public class App {
             String workout = schedule.get(i);
 
             if (workout.equals("Rest")) {
-                System.out.printf("%s : %s\n", day, workout);
+                System.out.printf("[-] %s : %s\n", day, workout);
             } else {
-                System.out.printf("%s : %s\n", day, workout);
+                System.out.printf("[-] %s : %s\n", day, workout);
             }
         }
         System.out.println("==========================      REKOMENDASI LATIHAN          ===========================");
