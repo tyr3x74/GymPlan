@@ -58,80 +58,23 @@ class Graph {
     }
 }
 
-class BST {
-    static class Node {
-        WorkoutNode workout;
-        Node left, right;
-
-        Node(WorkoutNode workout) {
-            this.workout = workout;
-        }
-    }
-
-    Node root;
-
-    public void insert(WorkoutNode workout) {
-        root = insertRec(root, workout);
-    }
-
-    private Node insertRec(Node root, WorkoutNode workout) {
-        if (root == null) return new Node(workout);
-
-        if (workout.priority < root.workout.priority)
-            root.left = insertRec(root.left, workout);
-        else
-            root.right = insertRec(root.right, workout);
-
-        return root;
-    }
-
-    public void inorder(Node root, List<WorkoutNode> output) {
-        if (root != null) {
-            inorder(root.left, output);
-            output.add(root.workout);
-            inorder(root.right, output);
-        }
-    }
-
-    public List<WorkoutNode> getSortedWorkouts() {
-        List<WorkoutNode> list = new ArrayList<>();
-        inorder(root, list);
-        return list;
-    }
-
-    public WorkoutNode search(int priority) {
-        return searchRec(root, priority);
-    }
-
-    private WorkoutNode searchRec(Node root, int priority) {
-        if (root == null) return null;
-
-        if (root.workout.priority == priority) return root.workout;
-
-        if (priority < root.workout.priority)
-            return searchRec(root.left, priority);
-
-        return searchRec(root.right, priority);
-    }
-}
-
 public class ScheduleGenerator {
     static final String[] WEEK = {
             "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"
     };
 
     String goal;
-    BST bst;
+    List<WorkoutNode> sortedWorkouts;
 
-    ScheduleGenerator(String goal, BST bst) {
+    ScheduleGenerator(String goal, List<WorkoutNode> sortedWorkouts) {
         this.goal = goal;
-        this.bst = bst;
+        this.sortedWorkouts = sortedWorkouts;
     }
 
     private String buildWorkout(WorkoutNode workout, int index, int totalFreq) {
         String name = workout.name;
         String tipe = workout.type;
-        
+
         if(tipe == "strength"){
             name += " Strength";
         } else if (tipe == "hypertrophy") {
@@ -145,7 +88,7 @@ public class ScheduleGenerator {
                     name += " + LISS 20 min";
                 }
             } else if (goal == "Recomposition") {
-                    name += " + HIIT 10 min";
+                name += " + HIIT 10 min";
             } else {
                 name += " + LISS 12 min";
             }
@@ -156,9 +99,9 @@ public class ScheduleGenerator {
 
     public List<String> buildSchedule(int freq) {
         List<String> schedule = new ArrayList<>(Collections.nCopies(7, "Rest"));
-        List<WorkoutNode> sortedWorkouts = bst.getSortedWorkouts();
         int dayIndex = 0;
         int workoutCount = 0;
+
         for (int i = 0; i < sortedWorkouts.size() && workoutCount < freq; i++) {
             WorkoutNode workout = sortedWorkouts.get(i);
             while (dayIndex < 7 && !schedule.get(dayIndex).equals("Rest")) {
@@ -173,7 +116,6 @@ public class ScheduleGenerator {
             dayIndex++;
             if (freq == 6 && workoutCount == 3){
                 dayIndex++;
-
             }
             if (freq == 2 && workoutCount < 2){
                 dayIndex++;

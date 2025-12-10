@@ -26,7 +26,6 @@ public class App {
         System.out.print("[+] Tinggi (cm): ");
         double height = sc.nextDouble();
 
-
         System.out.print("[+] Lemak tubuh (%): ");
         int bodyfat = sc.nextInt();
 
@@ -62,9 +61,11 @@ public class App {
 
         if (goal == "Cutting") {
             if(freq <= 2 ){
-                graph.addNode("Full Body", 1, "strength", false);
+                graph.addNode("Full Body", 1, "hypertrophy", true);
                 graph.addNode("Full Body", 2, "hypertrophy", true);
             } else if (freq == 4) {
+                graph.addNode("Upper Body", 5, "hypertrophy", true);
+                graph.addNode("Lower Body", 6, "hypertrophy", true);
                 graph.addNode("Push", 1, "hypertrophy", true);
                 graph.addNode("Pull", 2, "hypertrophy", true);
                 graph.addNode("Legs", 3, "hypertrophy", false);
@@ -80,8 +81,10 @@ public class App {
         } else if (goal == "Bulking") {
             if(freq <= 2 ){
                 graph.addNode("Full Body", 1, "strength", false);
-                graph.addNode("Full Body", 2, "hypertrophy", false);
+                graph.addNode("Full Body", 2, "hypertrophy", true);
             } else if (freq == 4) {
+                graph.addNode("Upper Body", 5, "hypertrophy", false);
+                graph.addNode("Lower Body", 6, "hypertrophy", false);
                 graph.addNode("Push", 1, "strength", false);
                 graph.addNode("Pull", 2, "strength", false);
                 graph.addNode("Legs", 3, "strength", false);
@@ -112,13 +115,9 @@ public class App {
                 graph.addNode("Full Body", 6, "hypertrophy", true);
             }
         }
-        List<WorkoutNode> sortedSchedule = graph.Priority();
-        BST bst = new BST();
-        for (WorkoutNode workout : sortedSchedule) {
-            bst.insert(workout);
-        }
 
-        ScheduleGenerator generator = new ScheduleGenerator(goal, bst);
+        List<WorkoutNode> sortedSchedule = graph.Priority();
+        ScheduleGenerator generator = new ScheduleGenerator(goal, sortedSchedule);
         List<String> schedule = generator.buildSchedule(freq);
 
         for (int i = 0; i < 7; i++) {
@@ -134,5 +133,4 @@ public class App {
         System.out.println("==========================      REKOMENDASI LATIHAN          ===========================");
         System.out.println("COMMING SOOOOOONNNNNNN!!!!!!!!!");
     }
-
 }
