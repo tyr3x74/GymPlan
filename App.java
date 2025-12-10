@@ -64,18 +64,38 @@ public class App {
                 graph.addNode("Full Body", 1, "hypertrophy", true);
                 graph.addNode("Full Body", 2, "hypertrophy", true);
             } else if (freq == 4) {
-                graph.addNode("Upper Body", 5, "hypertrophy", true);
-                graph.addNode("Lower Body", 6, "hypertrophy", true);
+                graph.addNode("Upper Body", 11, "strength", false);
+                graph.addNode("Upper Body", 9, "hypertrophy", true);
+
+                graph.addNode("Lower Body", 12, "strength", false);
+                graph.addNode("Lower Body", 10, "hypertrophy", false);
+
+                graph.addNode("Push", 6, "strength", false);
+                graph.addNode("Pull", 7, "strength", false);
+                graph.addNode("Legs", 8, "strength", false);
+
                 graph.addNode("Push", 1, "hypertrophy", true);
                 graph.addNode("Pull", 2, "hypertrophy", true);
                 graph.addNode("Legs", 3, "hypertrophy", false);
+
+                graph.addNode("Full Body", 5, "strength", false);
                 graph.addNode("Full Body", 4, "hypertrophy", true);
             } else {
+                graph.addNode("Upper Body", 11, "strength", false);
                 graph.addNode("Upper Body", 4, "hypertrophy", true);
-                graph.addNode("Lower Body", 5, "hypertrophy", true);
+
+                graph.addNode("Lower Body", 12, "strength", false);
+                graph.addNode("Lower Body", 5, "hypertrophy", false);
+
+                graph.addNode("Push", 7, "strength", false);
+                graph.addNode("Pull", 8, "strength", false);
+                graph.addNode("Legs", 9, "strength", false);
+
                 graph.addNode("Push", 1, "hypertrophy", true);
                 graph.addNode("Pull", 2, "hypertrophy", true);
                 graph.addNode("Legs", 3, "hypertrophy", false);
+
+                graph.addNode("Full Body", 10, "strength", false);
                 graph.addNode("Full Body", 6, "hypertrophy", true);
             }
         } else if (goal == "Bulking") {
@@ -83,19 +103,39 @@ public class App {
                 graph.addNode("Full Body", 1, "strength", false);
                 graph.addNode("Full Body", 2, "hypertrophy", true);
             } else if (freq == 4) {
-                graph.addNode("Upper Body", 5, "hypertrophy", false);
-                graph.addNode("Lower Body", 6, "hypertrophy", false);
+                graph.addNode("Upper Body", 11, "strength", false);
+                graph.addNode("Upper Body", 12, "hypertrophy", true);
+
+                graph.addNode("Lower Body", 9, "strength", false);
+                graph.addNode("Lower Body", 10, "hypertrophy", false);
+
                 graph.addNode("Push", 1, "strength", false);
                 graph.addNode("Pull", 2, "strength", false);
                 graph.addNode("Legs", 3, "strength", false);
-                graph.addNode("Full Body", 4, "hypertrophy", true);
+
+                graph.addNode("Push", 6, "hypertrophy", true);
+                graph.addNode("Pull", 7, "hypertrophy", true);
+                graph.addNode("Legs", 8, "hypertrophy", false);
+
+                graph.addNode("Full Body", 4, "strength", false);
+                graph.addNode("Full Body", 5, "hypertrophy", true);
             } else {
-                graph.addNode("Upper Body", 4, "hypertrophy", false);
+                graph.addNode("Upper Body", 11, "strength", false);
+                graph.addNode("Upper Body", 4, "hypertrophy", true);
+
+                graph.addNode("Lower Body", 12, "strength", false);
                 graph.addNode("Lower Body", 5, "hypertrophy", false);
+
                 graph.addNode("Push", 1, "strength", false);
                 graph.addNode("Pull", 2, "strength", false);
                 graph.addNode("Legs", 3, "strength", false);
-                graph.addNode("Full Body", 6, "hypertrophy", false);
+
+                graph.addNode("Push", 7, "hypertrophy", true);
+                graph.addNode("Pull", 8, "hypertrophy", true);
+                graph.addNode("Legs", 9, "hypertrophy", false);
+
+                graph.addNode("Full Body", 10, "strength", false);
+                graph.addNode("Full Body", 6, "hypertrophy", true);
             }
         } else {
             if(freq <= 2 ){
@@ -103,15 +143,38 @@ public class App {
                 graph.addNode("Full Body", 2, "hypertrophy", true);
             } else if (freq == 4) {
                 graph.addNode("Upper Body", 1, "strength", false);
-                graph.addNode("Lower Body", 2, "strength", false);
                 graph.addNode("Upper Body", 3, "hypertrophy", true);
-                graph.addNode("Lower Body", 4, "hypertrophy", false);
-            } else {
-                graph.addNode("Upper Body", 1, "strength", true);
+
                 graph.addNode("Lower Body", 2, "strength", false);
-                graph.addNode("Push", 3, "hypertrophy", true);
-                graph.addNode("Pull", 4, "hypertrophy", false);
+                graph.addNode("Lower Body", 4, "hypertrophy", false);
+
+                graph.addNode("Push", 10, "strength", false);
+                graph.addNode("Pull", 9, "strength", false);
+                graph.addNode("Legs", 8, "strength", false);
+
+                graph.addNode("Push", 7, "hypertrophy", true);
+                graph.addNode("Pull", 6, "hypertrophy", true);
                 graph.addNode("Legs", 5, "hypertrophy", false);
+
+                graph.addNode("Full Body", 11, "strength", false);
+                graph.addNode("Full Body", 12, "hypertrophy", true);
+
+            } else {
+                graph.addNode("Upper Body", 1, "strength", false);
+                graph.addNode("Upper Body", 12, "hypertrophy", true);
+
+                graph.addNode("Lower Body", 2, "strength", false);
+                graph.addNode("Lower Body", 10, "hypertrophy", false);
+
+                graph.addNode("Push", 7, "strength", false);
+                graph.addNode("Pull", 8, "strength", false);
+                graph.addNode("Legs", 9, "strength", false);
+
+                graph.addNode("Push", 3, "hypertrophy", true);
+                graph.addNode("Pull", 4, "hypertrophy", true);
+                graph.addNode("Legs", 5, "hypertrophy", false);
+
+                graph.addNode("Full Body", 11, "strength", false);
                 graph.addNode("Full Body", 6, "hypertrophy", true);
             }
         }
