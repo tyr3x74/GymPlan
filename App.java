@@ -1,199 +1,205 @@
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("  /$$$$$$  /$$     /$$ /$$      /$$       /$$$$$$$  /$$                    \n" +
-                " /$$__  $$|  $$   /$$/| $$$    /$$$      | $$__  $$| $$                    \n" +
-                "| $$  \\__/ \\  $$ /$$/ | $$$$  /$$$$      | $$  \\ $$| $$  /$$$$$$  /$$$$$$$ \n" +
-                "| $$ /$$$$  \\  $$$$/  | $$ $$/$$ $$      | $$$$$$$/| $$ |____  $$| $$__  $$\n" +
-                "| $$|_  $$   \\  $$/   | $$  $$$| $$      | $$____/ | $$  /$$$$$$$| $$  \\ $$\n" +
-                "| $$  \\ $$    | $$    | $$\\  $ | $$      | $$      | $$ /$$__  $$| $$  | $$\n" +
-                "|  $$$$$$/    | $$    | $$ \\/  | $$      | $$      | $$|  $$$$$$$| $$  | $$\n" +
-                " \\______/     |__/    |__/     |__/      |__/      |__/ \\_______/|__/  |__/\n"
-        );
-        System.out.print("[+] Nama : ");
-        String nama = sc.nextLine();
+        System.out.println("╔════════════════════════════════════════════════╗");
+        System.out.println("║                                                ║");
+        System.out.println("║            🏋️  G Y M P L A N  💪              ║");
+        System.out.println("║                                                ║");
+        System.out.println("║        Your Personal Fitness Companion         ║");
+        System.out.println("║                                                ║");
+        System.out.println("╚════════════════════════════════════════════════╝");
+        System.out.println();
+        System.out.println("   \"Transform Your Body, Transform Your Life\"");
+        System.out.println();
+        System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+        System.out.println();
+        System.out.println("📊 Aplikasi ini akan membantu kamu:");
+        System.out.println("   ✓ Menghitung BMI, BMR, dan TDEE");
+        System.out.println("   ✓ Menentukan goal fitness kamu");
+        System.out.println("   ✓ Merencanakan nutrisi harian");
+        System.out.println("   ✓ Membuat jadwal latihan mingguan");
+        System.out.println();
+        System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+        System.out.println("🤗Mari kita mulai dengan mengisi biodata kamu!🤗");
+        System.out.print("Nama kamu              : ");
+        String name = sc.nextLine();
 
-        System.out.print("[+] Gender (M/F): ");
-        String gender = sc.nextLine();
+        System.out.print("Gender (M/F)           : ");
+        String gender = sc.nextLine().trim();
 
-        System.out.print("[+] Berat (kg): ");
-        double weight = sc.nextDouble();
+        System.out.print("Berat badan (kg)       : ");
+        double weight = Double.parseDouble(sc.nextLine());
 
-        System.out.print("[+] Tinggi (cm): ");
-        double height = sc.nextDouble();
+        System.out.print("Tinggi badan (cm)      : ");
+        double height = Double.parseDouble(sc.nextLine());
 
-        System.out.print("[+] Lemak tubuh (%): ");
-        int bodyfat = sc.nextInt();
+        System.out.print("Umur (tahun)           : ");
+        int age = Integer.parseInt(sc.nextLine());
 
-        System.out.print("[+] Umur: ");
-        int age = sc.nextInt();
+        System.out.print("Perkiraan body fat (%) : ");
+        double bodyFat = Double.parseDouble(sc.nextLine());
 
-        System.out.print("[+] Frekuensi latihan per minggu (1-6): ");
-        int freq = sc.nextInt();
+        System.out.print("Frekuensi latihan per minggu (1-6) : ");
+        int freq = Integer.parseInt(sc.nextLine());
+        if (freq < 1) freq = 1;
+        if (freq > 6) freq = 6;
 
-        if(freq < 1){
-            System.out.println("[!] Frekuensi latihan tidak bisa kurang dari 1");
-        }
-        if(freq > 6){
-            System.out.println("[!] Frekuensi latihan tidak bisa lebih dari 6");
-        }
 
-        Profile user = new Profile(nama, weight, height, bodyfat, age, freq, gender);
-        Map<String, Double> makro = user.calculate();
-        String goal = user.Goal();
+        Profile profile = new Profile(name, gender, weight, height, age, bodyFat);
+        Map<String, Double> result = profile.calculate();
+        ScheduleGenerator generator = new ScheduleGenerator(profile.getGoal());
 
-        System.out.println("==============================      HASIL ANALISIS     ================================");
-        System.out.printf("[-] Nama                 : %s", nama);
-        System.out.printf("\n[-] BMI                  : %.0f (%s)", user.bmi(), user.bmiStatus());
-        System.out.printf("\n[-] Bodyfat              : %s (%d%%)", user.fatStatus(), bodyfat);
-        System.out.printf("\n[-] Rekomendasi Goal     : %s", goal);
-        System.out.println("\n==========================      KEBUTUHAN NUTRISI HARIAN     ===========================");
-        System.out.printf("[-] Target Kalori        : %.0f kkal/hari", makro.get("calories"));
-        System.out.printf("\n[-] Protein              : %.0f gram/hari", makro.get("protein"));
-        System.out.printf("\n[-] Karbo                : %.0f gram/hari", makro.get("carbs"));
-        System.out.printf("\n[-] Lemak                : %.0f gram/hari", makro.get("fat"));
-        System.out.println("\n==========================          JADWAL LATIHAN          ===========================");
-        Graph graph = new Graph();
+        while (true) {
+            System.out.println("\n========================================");
+            System.out.println("           MENU UTAMA");
+            System.out.println("========================================");
+            System.out.println("1. Lihat Profil");
+            System.out.println("2. Lihat Nutrisi Harian");
+            System.out.println("3. Lihat Rekomendasi Jadwal Latihan Mingguan");
+            System.out.println("4. Workout Finder");
+            System.out.println("5. Keluar");
+            System.out.println("========================================");
+            System.out.print("Pilih menu (1-5): ");
 
-        if (goal == "Cutting") {
-            if(freq <= 2 ){
-                graph.addNode("Full Body", 1, "hypertrophy", true);
-                graph.addNode("Full Body", 2, "hypertrophy", true);
-            } else if (freq == 4) {
-                graph.addNode("Upper Body", 11, "strength", false);
-                graph.addNode("Upper Body", 9, "hypertrophy", true);
-
-                graph.addNode("Lower Body", 12, "strength", false);
-                graph.addNode("Lower Body", 10, "hypertrophy", false);
-
-                graph.addNode("Push", 6, "strength", false);
-                graph.addNode("Pull", 7, "strength", false);
-                graph.addNode("Legs", 8, "strength", false);
-
-                graph.addNode("Push", 1, "hypertrophy", true);
-                graph.addNode("Pull", 2, "hypertrophy", true);
-                graph.addNode("Legs", 3, "hypertrophy", false);
-
-                graph.addNode("Full Body", 5, "strength", false);
-                graph.addNode("Full Body", 4, "hypertrophy", true);
-            } else {
-                graph.addNode("Upper Body", 11, "strength", false);
-                graph.addNode("Upper Body", 4, "hypertrophy", true);
-
-                graph.addNode("Lower Body", 12, "strength", false);
-                graph.addNode("Lower Body", 5, "hypertrophy", false);
-
-                graph.addNode("Push", 7, "strength", false);
-                graph.addNode("Pull", 8, "strength", false);
-                graph.addNode("Legs", 9, "strength", false);
-
-                graph.addNode("Push", 1, "hypertrophy", true);
-                graph.addNode("Pull", 2, "hypertrophy", true);
-                graph.addNode("Legs", 3, "hypertrophy", false);
-
-                graph.addNode("Full Body", 10, "strength", false);
-                graph.addNode("Full Body", 6, "hypertrophy", true);
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    showProfile(name, gender, weight, height, age, bodyFat, result);
+                    break;
+                case 2:
+                    showNutrition(result, profile.getGoal());
+                    break;
+                case 3:
+                    showSchedule(generator, freq, profile.getGoal());
+                    break;
+                case 4:
+                    showWorkoutFinder(generator, sc);
+                    break;
+                case 5:
+                    System.out.println("\nTerima kasih telah menggunakan GYMPLAN!");
+                    System.out.println("Semangat latihannya! 💪");
+                    return;
+                default:
+                    System.out.println("\n❌ Pilihan tidak valid. Silakan pilih 1-5.");
             }
-        } else if (goal == "Bulking") {
-            if(freq <= 2 ){
-                graph.addNode("Full Body", 1, "strength", false);
-                graph.addNode("Full Body", 2, "hypertrophy", true);
-            } else if (freq == 4) {
-                graph.addNode("Upper Body", 11, "strength", false);
-                graph.addNode("Upper Body", 12, "hypertrophy", true);
+            System.out.print("\nTekan ENTER untuk kembali ke menu...");
+            sc.nextLine();
 
-                graph.addNode("Lower Body", 9, "strength", false);
-                graph.addNode("Lower Body", 10, "hypertrophy", false);
+        }
 
-                graph.addNode("Push", 1, "strength", false);
-                graph.addNode("Pull", 2, "strength", false);
-                graph.addNode("Legs", 3, "strength", false);
 
-                graph.addNode("Push", 6, "hypertrophy", true);
-                graph.addNode("Pull", 7, "hypertrophy", true);
-                graph.addNode("Legs", 8, "hypertrophy", false);
+    }
 
-                graph.addNode("Full Body", 4, "strength", false);
-                graph.addNode("Full Body", 5, "hypertrophy", true);
-            } else {
-                graph.addNode("Upper Body", 11, "strength", false);
-                graph.addNode("Upper Body", 4, "hypertrophy", true);
+    private static void showProfile(String name, String gender, double weight,
+                                    double height, int age, double bodyFat,
+                                    Map<String, Double> result) {
+        System.out.println("\n========================================");
+        System.out.println("           PROFIL USER");
+        System.out.println("========================================");
+        System.out.println("Nama          : " + name);
+        System.out.println("Gender        : " + (gender.equalsIgnoreCase("M") ? "Pria" : "Wanita"));
+        System.out.println("Berat Badan   : " + weight + " kg");
+        System.out.println("Tinggi Badan  : " + height + " cm");
+        System.out.println("Umur          : " + age + " tahun");
+        System.out.println("Body Fat      : " + bodyFat + " %");
+        System.out.println("----------------------------------------");
+        System.out.printf("BMI           : %.2f ", result.get("BMI"));
 
-                graph.addNode("Lower Body", 12, "strength", false);
-                graph.addNode("Lower Body", 5, "hypertrophy", false);
-
-                graph.addNode("Push", 1, "strength", false);
-                graph.addNode("Pull", 2, "strength", false);
-                graph.addNode("Legs", 3, "strength", false);
-
-                graph.addNode("Push", 7, "hypertrophy", true);
-                graph.addNode("Pull", 8, "hypertrophy", true);
-                graph.addNode("Legs", 9, "hypertrophy", false);
-
-                graph.addNode("Full Body", 10, "strength", false);
-                graph.addNode("Full Body", 6, "hypertrophy", true);
-            }
+        double bmi = result.get("BMI");
+        if (bmi < 18.5) {
+            System.out.println("(Underweight)");
+        } else if (bmi < 25) {
+            System.out.println("(Normal)");
+        } else if (bmi < 30) {
+            System.out.println("(Overweight)");
         } else {
-            if(freq <= 2 ){
-                graph.addNode("Full Body", 1, "strength", false);
-                graph.addNode("Full Body", 2, "hypertrophy", true);
-            } else if (freq == 4) {
-                graph.addNode("Upper Body", 1, "strength", false);
-                graph.addNode("Upper Body", 3, "hypertrophy", true);
-
-                graph.addNode("Lower Body", 2, "strength", false);
-                graph.addNode("Lower Body", 4, "hypertrophy", false);
-
-                graph.addNode("Push", 10, "strength", false);
-                graph.addNode("Pull", 9, "strength", false);
-                graph.addNode("Legs", 8, "strength", false);
-
-                graph.addNode("Push", 7, "hypertrophy", true);
-                graph.addNode("Pull", 6, "hypertrophy", true);
-                graph.addNode("Legs", 5, "hypertrophy", false);
-
-                graph.addNode("Full Body", 11, "strength", false);
-                graph.addNode("Full Body", 12, "hypertrophy", true);
-
-            } else {
-                graph.addNode("Upper Body", 1, "strength", false);
-                graph.addNode("Upper Body", 12, "hypertrophy", true);
-
-                graph.addNode("Lower Body", 2, "strength", false);
-                graph.addNode("Lower Body", 10, "hypertrophy", false);
-
-                graph.addNode("Push", 7, "strength", false);
-                graph.addNode("Pull", 8, "strength", false);
-                graph.addNode("Legs", 9, "strength", false);
-
-                graph.addNode("Push", 3, "hypertrophy", true);
-                graph.addNode("Pull", 4, "hypertrophy", true);
-                graph.addNode("Legs", 5, "hypertrophy", false);
-
-                graph.addNode("Full Body", 11, "strength", false);
-                graph.addNode("Full Body", 6, "hypertrophy", true);
-            }
+            System.out.println("(Obese)");
         }
 
-        List<WorkoutNode> sortedSchedule = graph.Priority();
-        ScheduleGenerator generator = new ScheduleGenerator(goal, sortedSchedule);
-        List<String> schedule = generator.buildSchedule(freq);
+        System.out.printf("BMR           : %.0f kcal/hari\n", result.get("BMR"));
+        System.out.printf("TDEE          : %.0f kcal/hari\n", result.get("TDEE"));
+        System.out.println("========================================");
 
-        for (int i = 0; i < 7; i++) {
-            String day = ScheduleGenerator.WEEK[i];
-            String workout = schedule.get(i);
 
-            if (workout.equals("Rest")) {
-                System.out.printf("[-] %s : %s\n", day, workout);
-            } else {
-                System.out.printf("[-] %s : %s\n", day, workout);
-            }
+    }
+
+    private static void showNutrition(Map<String, Double> result, String goal) {
+        System.out.println("\n========================================");
+        System.out.println("        NUTRISI HARIAN");
+        System.out.println("========================================");
+        System.out.println("Goal          : " + goal);
+        System.out.println("----------------------------------------");
+        System.out.printf("Target Kalori : %.0f kcal/hari\n", result.get("TargetCalories"));
+        System.out.println();
+        System.out.printf("Protein       : %.0f gram/hari\n", result.get("Protein"));
+        System.out.printf("Karbohidrat   : %.0f gram/hari\n", result.get("Carbs"));
+        System.out.printf("Lemak         : %.0f gram/hari\n", result.get("Fat"));
+        System.out.println("========================================");
+
+        if (goal.equals("Cutting")) {
+            System.out.println("\n💡 Tips Cutting:");
+            System.out.println("   - Prioritaskan protein tinggi");
+            System.out.println("   - Kurangi karbo di malam hari");
+            System.out.println("   - Perbanyak sayuran untuk kenyang");
+        } else if (goal.equals("Bulking")) {
+            System.out.println("\n💡 Tips Bulking:");
+            System.out.println("   - Makan 4-5 kali sehari");
+            System.out.println("   - Tambah karbo di sekitar workout");
+            System.out.println("   - Jangan skip makan");
+        } else {
+            System.out.println("\n💡 Tips Recomposition:");
+            System.out.println("   - Konsisten dengan target kalori");
+            System.out.println("   - Fokus pada protein & latihan");
+            System.out.println("   - Sabar dengan prosesnya");
         }
-        System.out.println("==========================      REKOMENDASI LATIHAN          ===========================");
-        System.out.println("COMMING SOOOOOONNNNNNN!!!!!!!!!");
+    }
+
+    private static void showSchedule(ScheduleGenerator generator, int freq, String goal) {
+        System.out.println("\n========================================");
+        System.out.println("    JADWAL LATIHAN MINGGUAN");
+        System.out.println("========================================");
+        System.out.println("Goal          : " + goal);
+        System.out.println("Frekuensi     : " + freq + " hari/minggu");
+        System.out.println("========================================");
+
+        generator.generateSchedule(freq);
+
+        System.out.println("\n========================================");
+        System.out.println("[-] Keterangan Priority:");
+        System.out.println("   Main     - Latihan utama (wajib)");
+        System.out.println("   Support  - Latihan pendukung");
+        System.out.println("   Optional - Latihan opsional");
+        System.out.println("========================================");
+    }
+    private static void showWorkoutFinder(ScheduleGenerator generator, Scanner sc) {
+        System.out.println("\n========================================");
+        System.out.println("        WORKOUT FINDER ");
+        System.out.println("========================================");
+        System.out.println("Group tersedia: Push, Pull, Legs, Full Body, Cardio, Core, All");
+        System.out.print("Pilih group: ");
+        String group = sc.nextLine().trim();
+        if (group.isEmpty()) group = "All";
+
+        System.out.print("Min difficulty (1-10): ");
+        int minDiff = Integer.parseInt(sc.nextLine());
+
+        System.out.print("Max difficulty (1-10): ");
+        int maxDiff = Integer.parseInt(sc.nextLine());
+
+        if (minDiff > maxDiff) {
+            int tmp = minDiff;
+            minDiff = maxDiff;
+            maxDiff = tmp;
+        }
+
+        System.out.print("Limit hasil (contoh: 5): ");
+        int limit = Integer.parseInt(sc.nextLine());
+
+        generator.workoutFinder(group, minDiff, maxDiff, limit);
     }
 }
