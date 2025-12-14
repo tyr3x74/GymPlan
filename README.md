@@ -76,6 +76,30 @@ GymPlan menawarkan solusi berupa aplikasi berbasis Command Line Interface (CLI) 
     - Method bubbleSortByPriority()
     - File ScheduleGenerator.java.
   
+
+Screenshoot Program
+
+[Menu Awal]
+
+<img width="619" height="689" alt="image" src="https://github.com/user-attachments/assets/d975dbd4-0b14-435b-827b-19d9471e4bd0" />
+
+
+
+[Menu Utama]
+
+
+<img width="587" height="336" alt="image" src="https://github.com/user-attachments/assets/0dc742e7-11af-4137-8ba6-76f26e224a29" />
+
+
+
+[Lihat Rekomendasi Jadwal]
+
+
+<img width="849" height="862" alt="image" src="https://github.com/user-attachments/assets/759ca626-30e4-4d77-aa9d-89b8258fd5b3" />
+
+
+
+  
     
 
 
