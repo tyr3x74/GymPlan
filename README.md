@@ -97,12 +97,7 @@ GymPlan menawarkan solusi berupa aplikasi berbasis Command Line Interface (CLI) 
 
 <img width="849" height="862" alt="image" src="https://github.com/user-attachments/assets/759ca626-30e4-4d77-aa9d-89b8258fd5b3" />
 
--
--
--
 
-LINK YOUTUBE
-https://youtu.be/N-8RiV-U4G8
 
 
 
