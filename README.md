@@ -47,6 +47,9 @@ GymPlan menawarkan solusi berupa aplikasi berbasis Command Line Interface (CLI) 
     - Class WorkoutBST
     - Method insert(), printInOrder(), findInRange()
     - File ScheduleGenerator.java.
+  
+      <img width="531" height="533" alt="image" src="https://github.com/user-attachments/assets/f5243a8c-057d-4e72-a4dc-5b784eb4b8bc" />
+
 
 2. Graph (Relasi Kelompok Otot)
 
@@ -60,6 +63,9 @@ GymPlan menawarkan solusi berupa aplikasi berbasis Command Line Interface (CLI) 
     - Class MuscleGraph
     - Method buildSplit()
     - File ScheduleGenerator.java.
+      
+       <img width="525" height="693" alt="image" src="https://github.com/user-attachments/assets/822bfbef-43b1-4fc5-94f6-7cacbaa986f4" />
+
 
 3. Sorting (Bubble Sort)
 
@@ -71,5 +77,10 @@ GymPlan menawarkan solusi berupa aplikasi berbasis Command Line Interface (CLI) 
     - Method bubbleSortByPriority()
     - File ScheduleGenerator.java.
   
+      <img width="558" height="412" alt="image" src="https://github.com/user-attachments/assets/0e4c53dc-1a5e-4a75-b7ec-79cce3701516" />
+
+
+
+
 
 
