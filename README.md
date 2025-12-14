@@ -77,7 +77,7 @@ GymPlan menawarkan solusi berupa aplikasi berbasis Command Line Interface (CLI) 
     - File ScheduleGenerator.java.
   
 
-Screenshoot Program
+*SCREENSHOOT PROGRAM*
 
 [Menu Awal]
 
